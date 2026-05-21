@@ -11,17 +11,17 @@ while True:
     if index_recipe == 1:
         for i in kebab:
             weight_i = int(kebab[i] * n)
-            total_weight += int(weight_i)
+            total_weight += weight_i
             print(i, '-', str(weight_i) + 'г')
     elif index_recipe == 2:
         for i in chicken_cutlet:
             weight_i = int(chicken_cutlet[i] * n)
-            total_weight += int(weight_i)
+            total_weight += weight_i
             print(i, '-', str(int(weight_i)) + 'г')
     elif index_recipe == 3:
         for i in schnitzel:
             weight_i = int(schnitzel[i] * n)
-            total_weight += int(weight_i)
+            total_weight += weight_i
             print(i, '-', str(int(weight_i)) + 'г')
     else:
         print()
