@@ -1,22 +1,23 @@
 fish_cutlet = {'пангасиус':2500, 'минтай':2500, 'филе куринное':5000, 'сало':2500, 'лук':2500, 'хлеб':1050, 'соль':100}
+liezon = {'соль':35, 'вода':3800, 'мука':2340}
 
 while True:
     print('Какой рецепт вы хотите посчитать?')
     print('1 - льезон, 2 - рыбные котлеты', sep='\n')
     choice = int(input('Введите цифру - '))
     if choice == 1:
-        print('Расчет льезона на киевские котлеты')
-        otbiv = float(input('Напишите сколько отбивных: '))
+        n = float(input('Введите сколько отбивных у вас в наличии - ')) / 150
+        total_weight = 0
+        for i in liezon:
+            weight_i = int(liezon[i] * n)
+            total_weight += weight_i
+            if i == 'вода':
+                print(i, '-', str(weight_i - 800) + 'г')
+                print('молоко - 800г')
+            else:
+                print(i, '-', str(weight_i) + 'г')
         print()
-        salt = (34/145)*otbiv
-        water = (3800/145)*otbiv
-        utwater = water-800
-        flour =  (2340/145)*otbiv
-        lie = salt+water+flour
-        print('Добавьте', salt, 'грамм соли')
-        print(utwater, 'миллилитров воды и 800 миллилитров молока')
-        print('и', flour, 'грамм муки')
-        print('Общий объем льезона', lie, 'грамм')
+        print('Общий вес - ', str(int(total_weight)) + 'г')
         print()
     else:
         n_p = float(input('Введите сколько кг пангасиус у вас в наличии для замеса - '))
