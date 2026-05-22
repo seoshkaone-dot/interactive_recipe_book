@@ -35,10 +35,10 @@ while True:
         print('пангасиус -', str(int(n_p)) + 'г')
         print('минтай -', str(int(n_m)) + 'г')
         for i in fish_cutlet:
-                if i != 'пангасиус' and i != 'минтай':
-                    weight_i = int(fish_cutlet[i] * n)
-                    total_weight += weight_i
-                    print(i, '-', str(weight_i) + 'г')
+            if i != 'пангасиус' and i != 'минтай':
+                weight_i = int(fish_cutlet[i] * n)
+                total_weight += weight_i
+                print(i, '-', str(weight_i) + 'г')
         print()
         print('Общий вес - ', str(int(total_weight)) + 'г')
         print()
