@@ -1,6 +1,7 @@
 while True:
     print('Какой рецепт вы хотите посчитать?')
-    print('1 - люля-кебаб', '2 - котлеты куринные', '3 - шницель', '4 - рыбные котлеты', '5 - тефтели', '6 - льезон', sep='\n')
+    print('1 - люля-кебаб', '2 - котлеты куринные', '3 - шницель', '4 - рыбные котлеты', '5 - тефтели', 
+          '6 - свинно-говяжие люля-кебаб', '7 - бифштекс', '8 - льезон', sep='\n')
     index_recipe = int(input('Введите индекс рецепта - '))
     total_weight = 0
     if index_recipe == 1:
@@ -22,7 +23,7 @@ while True:
             total_weight += weight_i
             print(i, '-', str(int(weight_i)) + 'г')
     elif index_recipe == 3:
-        schnitzel = {'свинина':3000, 'филе куриное':7000, 'сало':3000, 'соль':100, 'чеснок':50, 'лук':1500, 'хлеб':1400, 'вода':700}
+        schnitzel = {'свинина':3000, 'филе куриное':7000, 'сало':3000, 'соль':100, 'чеснок':50, 'лук':1500, 'хлеб':700}
         print(*schnitzel.keys(), sep='\n')
         s = input('По какому ингредиенту нужно посчитать - ')
         n = float(input('Введите на сколько кг расчитать - ')) / (schnitzel[s] / 1000)
@@ -49,6 +50,25 @@ while True:
             total_weight += weight_i
             print(i, '-', str(int(weight_i)) + 'г')
     elif index_recipe == 6:
+        pork_beef_kebabs = {'говядина':3000, 'свинина':3000, 'филе куринное':4000, 'сало':3000, 'соль':100, 'лук':3000, 
+                            'хлеб':350}
+        print(*pork_beef_kebabs.keys(), sep='\n')
+        s = input('По какому ингредиенту нужно посчитать - ')
+        n = float(input('Введите на сколько кг расчитать - ')) / (pork_beef_kebabs[s] / 1000)
+        for i in pork_beef_kebabs:
+            weight_i = int(pork_beef_kebabs[i] * n)
+            total_weight += weight_i
+            print(i, '-', str(int(weight_i)) + 'г')
+    elif index_recipe == 7:
+        steak = {'говядина':6000, 'филе куринное':4000, 'сало':3000, 'соль':100, 'лук':2000, 'хлеб':700}
+        print(*steak.keys(), sep='\n')
+        s = input('По какому ингредиенту нужно посчитать - ')
+        n = float(input('Введите на сколько кг расчитать - ')) / (steak[s] / 1000)
+        for i in steak:
+            weight_i = int(steak[i] * n)
+            total_weight += weight_i
+            print(i, '-', str(int(weight_i)) + 'г')
+    elif index_recipe == 8:
         liezon = {'соль':35, 'вода':3800, 'мука':2340}
         n = float(input('Введите сколько отбивных у вас в наличии - ')) / 150
         total_weight = 0
