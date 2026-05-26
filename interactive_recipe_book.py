@@ -1,6 +1,6 @@
 while True:
     print('Какой рецепт вы хотите посчитать?')
-    print('1 - люля-кебаб', '2 - котлеты куринные', '3 - шницель', '4 - рыбные котлеты', '5 - льезон', sep='\n')
+    print('1 - люля-кебаб', '2 - котлеты куринные', '3 - шницель', '4 - рыбные котлеты', '5 - тефтели', '6 - льезон', sep='\n')
     index_recipe = int(input('Введите индекс рецепта - '))
     total_weight = 0
     if index_recipe == 1:
@@ -31,7 +31,7 @@ while True:
             total_weight += weight_i
             print(i, '-', str(int(weight_i)) + 'г')
     elif index_recipe == 4:
-        fish_cutlet = {'рыба':5000, 'филе куринное':5000, 'сало':2500, 'лук':2500, 'хлеб':1050, 'соль':100}
+        fish_cutlet = {'рыба':5000, 'филе куринное':5000, 'сало':2500, 'соль':100, 'лук':2500, 'хлеб':1050}
         print(*fish_cutlet.keys(), sep='\n')
         s = input('По какому ингредиенту нужно посчитать - ')
         n = float(input('Введите на сколько кг расчитать - ')) / (fish_cutlet[s] / 1000)
@@ -40,6 +40,15 @@ while True:
             total_weight += weight_i
             print(i, '-', str(int(weight_i)) + 'г')
     elif index_recipe == 5:
+        meatballs = {'филе куринное':3000, 'сало':800, 'соль':30, 'лук':800, 'рис':900}
+        print(*meatballs.keys(), sep='\n')
+        s = input('По какому ингредиенту нужно посчитать - ')
+        n = float(input('Введите на сколько кг расчитать - ')) / (meatballs[s] / 1000)
+        for i in meatballs:
+            weight_i = int(meatballs[i] * n)
+            total_weight += weight_i
+            print(i, '-', str(int(weight_i)) + 'г')
+    elif index_recipe == 6:
         liezon = {'соль':35, 'вода':3800, 'мука':2340}
         n = float(input('Введите сколько отбивных у вас в наличии - ')) / 150
         total_weight = 0
@@ -47,8 +56,8 @@ while True:
             weight_i = int(liezon[i] * n)
             total_weight += weight_i
             if i == 'вода':
-                print(i, '-', str(weight_i - 800) + 'г')
                 print('молоко - 800г')
+                print(i, '-', str(weight_i - 800) + 'г')
             else:
                 print(i, '-', str(weight_i) + 'г')
     else:
