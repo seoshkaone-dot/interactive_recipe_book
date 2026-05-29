@@ -24,33 +24,37 @@ while True:
     print(*recipes, sep='\n')
     recipe_name = input('Введите наименование рецепта - ')
     print()
-    recipe = recipes.get(recipe_name, 'Такого рецепта нет')
-    if recipe == 'Такого рецепта нет':
+    recipe = recipes.get(recipe_name, 'Ошибка! Такого рецепта нет')
+    if recipe == 'Ошибка! Такого рецепта нет':
         print(recipe)
         print()
         continue
     print('Ингредиенты:')
     print(*recipe.keys(), sep='\n')
-    ingredient_name = input('Введите наименование ингредиента - ')
-    ingredient = recipe.get(ingredient_name, 'Такого ингредиента нет')
-    if ingredient == 'Такого ингредиента нет':
-        print()
-        print(ingredient)
-        print()
-        continue
-    else:
-        ingredient = ingredient_name
-    try:
-        target_kg = float(input('Введите сколько кг - '))
-        if target_kg <= 0:
+    while True:
+        ingredient = input('Введите наименование ингредиента - ')
+        if ingredient not in recipe:
             print()
-            print('Число должно быть больше 0')
+            print('Ошибка! Такого ингредиента нет')
             print()
             continue
-    except ValueError:
-        print('Ошибка! Введите число (например: 2.5)')
+        else:
+            break
+    while True:
+        try:
+            target_kg = float(input('Введите сколько кг - '))
+            if target_kg <= 0:
+                print()
+                print('Ошибка! Число должно быть больше 0')
+                print()
+                continue
+            break
+        except ValueError:
+            print('Ошибка! Введите число (например: 2.5)')
     print()
     print('Готовый расчет:')
     result, total_weight = calculate_recipe(recipe, ingredient, target_kg)
-    print(result.items())
-    print('Общий вес - ', str(total_weight) + 'г')
+    for ing, w in result.items():
+        print(f'{ing} - {w} г')
+    print('Общий вес -', f'{total_weight} г')
+    print()
