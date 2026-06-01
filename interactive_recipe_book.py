@@ -9,9 +9,26 @@ recipes = {
     'Льезон':{'Отбивные':150, 'Соль':35, 'Вода':3800, 'Мука':2340}
 }
 
+def choose_index(s, names):
+    for index, name in enumerate(names, 1):
+        print(index, '-', name)
+    while True:
+        try:
+            index_names = int(input(s))
+            if 1 <= index_names <= len(names):
+                break
+            else:
+                print('Ошибка! Такого индекса нет')
+                continue
+        except ValueError:
+            print('Ошибка! Введите число (например: 1)')
+    result = names[index_names - 1]
+    return result
+
 def calculate_recipe(recipe, ingredient, target_kg):
     result = {}
     total_weight = 0
+    print(recipe, ingredient, target_kg)
     scale = target_kg / (recipe[ingredient] / 1000)
     for i in recipe:
         weight_i = int(recipe[i] * scale)
@@ -22,28 +39,10 @@ def calculate_recipe(recipe, ingredient, target_kg):
 while True:
     print('Рецепты:')
     recipe_names = list(recipes)
-    for index, name in enumerate(recipe_names, 1):
-        print(index, '-', name)
-    while True:
-        index_recipe = int(input('Введите индекс рецепта - '))
-        if 1 <= index_recipe <= len(recipe_names):
-            break
-        else:
-            print('Ошибка! Такого индекса нет')
-            continue
-    recipe_name = recipe_names[index_recipe - 1]
+    recipe_name = choose_index('Введите индекс рецепта - ', recipe_names)
     recipe = recipes[recipe_name]
     ingredient_names = list(recipe)
-    for index, name in enumerate(ingredient_names, 1):
-        print(index, '-', name)
-    while True:
-        index_ingredient = int(input('Введите индекс ингредиента - '))
-        if 1 <= index_ingredient <= len(ingredient_names):
-            break
-        else:
-            print('Ошибка! Такого индекса нет')
-            continue
-    ingredient = ingredient_names[index_ingredient - 1]
+    ingredient = choose_index('Введите индекс ингредиента - ', ingredient_names)
     while True:
         try:
             target_kg = float(input('Введите сколько кг - '))
