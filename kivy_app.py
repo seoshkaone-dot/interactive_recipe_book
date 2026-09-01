@@ -1,7 +1,12 @@
+import os
+
 from kivy.app import App
+from kivy.graphics import Rectangle
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
 
@@ -9,11 +14,22 @@ from recipe_manager import RecipeManager
 
 
 class RecipeBookApp(App):
+    def _update_background(self, instance, value):
+        if hasattr(self, 'background'):
+            self.background.pos = instance.pos
+            self.background.size = instance.size
+
     def build(self):
         self.manager = RecipeManager()
 
+        root = FloatLayout()
+        bg_path = os.path.join(os.path.dirname(__file__), 'b5453e42-709e-468f-b4e8-41a1f6bfd94b.png')
+        with root.canvas.before:
+            self.background = Rectangle(source=bg_path, pos=root.pos, size=root.size)
+        root.bind(size=self._update_background, pos=self._update_background)
+
         layout = BoxLayout(orientation='vertical', padding=16, spacing=16)
-        layout.add_widget(Label(text='Интерактивная книга рецептов', font_size='24sp'))
+        layout.add_widget(Label(text='Интерактивная книга рецептов', color=(0, 0, 0, 1), font_size='24sp'))
 
         self.recipe_spinner = Spinner(
             text='Выберите рецепт',
@@ -29,7 +45,7 @@ class RecipeBookApp(App):
         layout.add_widget(self.ingredient_spinner)
 
         self.kg_input = TextInput(
-            hint_text='Введите количество (кг)',
+            hint_text='Введите количество\n(в граммах, исключение отбивные в шт)',
             input_filter='float',
             multiline=False
         )
@@ -39,10 +55,11 @@ class RecipeBookApp(App):
         button.bind(on_press=self.calculate_recipe)
         layout.add_widget(button)
 
-        self.recipe_label = Label(text='Нажмите кнопку для показа рецептов')
+        self.recipe_label = Label(text='Нажмите кнопку для показа рецептов', color=(0, 0, 0, 1), size_hint=(1, 2))
         layout.add_widget(self.recipe_label)
 
-        return layout
+        root.add_widget(layout)
+        return root
     
     def on_recipe_select(self, spinner, text):
         ingredients = self.manager.get_ingredients(text)
@@ -69,6 +86,3 @@ class RecipeBookApp(App):
             self.recipe_label.text = text_result
         except Exception as e:
             self.recipe_label.text = f'Ошибка: {str(e)}'
-
-if __name__ == '__main__':
-    RecipeBookApp().run()

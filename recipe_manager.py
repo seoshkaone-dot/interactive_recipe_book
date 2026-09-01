@@ -19,7 +19,7 @@ class RecipeManager:
         recipe = self.recipes[recipe_name]
         result = {}
         total_weight = 0
-        scale = target_kg / (recipe[ingredient] / 1000)
+        scale = target_kg / (recipe[ingredient])
         for i in recipe:
             weight_i = int(recipe[i] * scale)
             total_weight += weight_i
