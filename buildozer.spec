@@ -13,6 +13,8 @@ android.minapi = 21
 android.ndk = 28c
 android.archs = arm64-v8a
 android.accept_sdk_license = True
+# Белый список файлов
+source.include_patterns = main.py, kivy_app.py, recipe_manager.py, recipes.json
 
 [buildozer]
 log_level = 2
